@@ -78,11 +78,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                       Navigator.push(context,
                                         MaterialPageRoute<void>(
                                           builder:(BuildContext context) { 
-                                            return const ChampionPage();
+                                            return ChampionPage(champion: champion);
                                           }
                                         )
                                       )
-                                                              },
+                                    },
                                     child: Column(
                                       children: [
                                         Image.network('http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion.id}_0.jpg'),
