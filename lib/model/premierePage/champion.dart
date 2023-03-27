@@ -11,6 +11,7 @@ class Champion{
   final String partype;
   final Object stats;
 
+
   const Champion({  
     required this.version,
     required this.id,

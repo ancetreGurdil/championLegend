@@ -1,21 +1,21 @@
 import 'dart:convert';
 import 'package:championlegends/champion_page.dart';
-import 'package:championlegends/model/all_champion.dart';
+import 'package:championlegends/model/premierePage/all_champion.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-Future <AllChampion> fetchChampion() async  {
-  final response =  await http.get(Uri.parse('http://ddragon.leagueoflegends.com/cdn/13.5.1/data/fr_FR/champion.json')) ;
+Future<AllChampion> fetchChampion() async {
+  final response = await http.get(Uri.parse(
+      'http://ddragon.leagueoflegends.com/cdn/13.5.1/data/fr_FR/champion.json'));
   if (response.statusCode == 200) {
     return AllChampion.fromJson(jsonDecode(response.body));
-  }else{
+  } else {
     throw Exception('Failed to load all Champions');
   }
 }
 
 void main() {
   runApp(const MyApp());
-  
 }
 
 class MyApp extends StatelessWidget {
@@ -55,88 +55,93 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   late Future<AllChampion> futureAllChampion;
   @override
-    void initState() {
+  void initState() {
     super.initState();
     futureAllChampion = fetchChampion();
-    
-    } 
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-       body: Container(
-                    padding: const EdgeInsets.all(8),
-                    child: 
-                      FutureBuilder<AllChampion>(
-                        future: futureAllChampion,
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            List<Widget> children = [];
-                            snapshot.data?.data.champions.values.forEach((champion) {
-                              children.add(
-                                InkResponse(
-                                    containedInkWell: true,
-                                    onTap: () => {
-                                      Navigator.push(context,
-                                        MaterialPageRoute<void>(
-                                          builder:(BuildContext context) { 
-                                            return ChampionPage(champion: champion);
-                                          }
-                                        )
-                                      )
-                                    },
-                                    child: Column(
-                                      children: [
-                                        Image.network('http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion.id}_0.jpg'),
-                                        Container(
-                                          padding: const EdgeInsets.all(8),
-                                          child: Text(champion.name),
-                                        )
-                                      ]),
-                                  ));
-                            });
-
-                            return GridView.count(
-                              crossAxisCount: 3,
-                              crossAxisSpacing: 5,
-                              mainAxisSpacing: 5,
-                              childAspectRatio: 0.8,
-                              children: children,
-                              );
-                          }
-                          // By default, show a loading spinner.
-                          return const CircularProgressIndicator();
-                  },),
+      body: Container(
+        padding: const EdgeInsets.all(8),
+        child: FutureBuilder<AllChampion>(
+          future: futureAllChampion,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              List<Widget> children = [];
+              snapshot.data?.data.champions.values.forEach((champion) {
+                if(champion.id != 'Aphelios'){
+                children.add(
+                  InkResponse(
+                    containedInkWell: true,
+                    onTap: () => {
+                      Navigator.push(context,
+                      MaterialPageRoute<void>(builder: (BuildContext context) {
+                        return ChampionPage(champion: champion);
+                      }))
+                    },
+                    child: Column(
+                      children: [
+                        Image.network(
+                          'http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion.id}_0.jpg'
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          child: 
+                            Text(champion.name),
+                        )
+                      ]
+                    ),
                   )
-        // GridView.count(  
-        //         crossAxisCount: 3,  
-        //         crossAxisSpacing: 20.0,  
-        //         mainAxisSpacing: 8.0,  
+                );
+              }}
+              );
+              return GridView.count(
+                crossAxisCount: 3,
+                crossAxisSpacing: 5,
+                mainAxisSpacing: 5,
+                childAspectRatio: 0.8,
+                children: children,
+              );
+            }
+            // By default, show a loading spinner.
+            return const CircularProgressIndicator();
+          },
+        ),
+      )
+    );
+  }
+}
+
+// GridView.count(
+        //         crossAxisCount: 3,
+        //         crossAxisSpacing: 20.0,
+        //         mainAxisSpacing: 8.0,
         //         children: <Widget>[
         //            Container(
         //             padding: const EdgeInsets.all(8),
-        //             child: 
+        //             child:
         //               Image.network('http://ddragon.leagueoflegends.com/cdn/img/champion/loading/Aatrox_0.jpg')
         //           ),
         //           Container(
         //              padding: const EdgeInsets.all(8),
-        //              child: 
+        //              child:
         //               Image.network('http://ddragon.leagueoflegends.com/cdn/img/champion/loading/Aatrox_0.jpg')
         //           ),
         //           Container(
         //              padding: const EdgeInsets.all(8),
-        //              child: 
+        //              child:
         //               Image.network('http://ddragon.leagueoflegends.com/cdn/img/champion/loading/Aatrox_0.jpg')
         //           ),
         //           Container(
         //              padding: const EdgeInsets.all(8),
-        //              child: 
+        //              child:
         //               Image.network('http://ddragon.leagueoflegends.com/cdn/img/champion/loading/Aatrox_0.jpg')
         //           ),Container(
         //              padding: const EdgeInsets.all(8),
-        //              child: 
+        //              child:
         //               Image.network('http://ddragon.leagueoflegends.com/cdn/img/champion/loading/Aatrox_0.jpg')
         //           ),
         //         ],
         // )
-    );
-  }
-}

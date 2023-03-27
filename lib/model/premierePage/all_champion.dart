@@ -1,8 +1,6 @@
-// ignore: camel_case_types
-import 'package:championlegends/model/champion.dart';
-import 'package:championlegends/model/list_champion.dart';
+import 'package:championlegends/model/premierePage/list_champion.dart';
 
-class  AllChampion {  
+class AllChampion {  
   final String type;
   final String format;
   final String version;

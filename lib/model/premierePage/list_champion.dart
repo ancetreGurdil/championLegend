@@ -1,4 +1,4 @@
-import 'package:championlegends/model/champion.dart';
+import 'package:championlegends/model/premierePage/champion.dart';
 
 class ListChampion {
    final Map<String,Champion> champions;
