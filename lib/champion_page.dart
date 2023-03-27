@@ -1,24 +1,14 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:championlegends/model/deuxiemePage/entire_champion.dart';
 import 'package:http/http.dart' as http;
 import 'package:championlegends/model/premierePage/champion.dart';
 import 'package:flutter/material.dart';
 
 
-
-Future<Entire> fetchEntire() async {
-  final response = await http.get(Uri.parse('http://ddragon.leagueoflegends.com/cdn/13.6.1/data/fr_FR/champion/Aatrox.json'));
-  if (response.statusCode == 200) {
-    return Entire.fromJson(jsonDecode(response.body));
-  } else {
-    throw Exception('Failed to load all Champions');
-  }
-}
-
 class ChampionPage extends StatefulWidget {
   const ChampionPage({super.key, required this.champion});
 
+  
   final Champion champion;
 
   @override
@@ -27,8 +17,16 @@ class ChampionPage extends StatefulWidget {
 }
 
 class _ChampionPageState extends State<ChampionPage> {
+  Future<Entire> fetchEntire() async {
+    final response = await http.get(Uri.parse('http://ddragon.leagueoflegends.com/cdn/13.6.1/data/fr_FR/champion/${widget.champion.id}.json'));
+    if (response.statusCode == 200) {
+      return Entire.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to load all Champions');
+    }
+  }
 
-	 late Future<Entire> futureEntire;
+	late Future<Entire> futureEntire;
   @override
   void initState() {
     super.initState();
@@ -54,7 +52,6 @@ class _ChampionPageState extends State<ChampionPage> {
         child: FutureBuilder<Entire>(
           future: futureEntire,
           builder: (context, snapshot) {
-            log(widget.champion.name);
             if (snapshot.hasError) {
               return Text(snapshot.error.toString());
             }
@@ -66,7 +63,7 @@ class _ChampionPageState extends State<ChampionPage> {
                     children: [
                       Container(
                         height: 400,
-                        width: 550,
+                        width: 500,
                         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 2.0),
                         decoration: BoxDecoration(
                           color: Colors.transparent,
@@ -83,6 +80,8 @@ class _ChampionPageState extends State<ChampionPage> {
                                 width: 70,
                                 height: 70,
                                 decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage('http://ddragon.leagueoflegends.com/cdn/13.6.1/img/passive/${champ.passive.image.full}')),
                                   border: Border.all(color: const Color.fromRGBO(200, 170, 110, 1), width: 3),
                                   borderRadius: BorderRadius.circular(5),
                                 ),
@@ -95,6 +94,23 @@ class _ChampionPageState extends State<ChampionPage> {
                                 width: 70,
                                 height: 70,
                                 decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage('http://ddragon.leagueoflegends.com/cdn/13.6.1/img/spell/${champ.spells}')),
+                                  border: Border.all(color: const Color.fromRGBO(200, 170, 110, 1), width: 3),
+                                  borderRadius: BorderRadius.circular(5),
+                                  
+                                )
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.topLeft, // Aligner les conteneurs au centre horizontalement
+                              child: Container(
+                                margin: const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+                                width: 70,
+                                height: 70,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage('http://ddragon.leagueoflegends.com/cdn/13.6.1/img/spell/${champ.passive.image.full}')),
                                   border: Border.all(color: const Color.fromRGBO(200, 170, 110, 1), width: 3),
                                   borderRadius: BorderRadius.circular(5),
                                 ),
@@ -107,18 +123,8 @@ class _ChampionPageState extends State<ChampionPage> {
                                 width: 70,
                                 height: 70,
                                 decoration: BoxDecoration(
-                                  border: Border.all(color: const Color.fromRGBO(200, 170, 110, 1), width: 3),
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.topLeft, // Aligner les conteneurs au centre horizontalement
-                              child: Container(
-                                margin: const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
-                                width: 70,
-                                height: 70,
-                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage('http://ddragon.leagueoflegends.com/cdn/13.6.1/img/spell/${champ.passive.image.full}')),
                                   border: Border.all(color: const Color.fromRGBO(200, 170, 110, 1), width: 3),
                                   borderRadius: BorderRadius.circular(5),
                                 ),

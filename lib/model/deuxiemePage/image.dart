@@ -11,10 +11,10 @@ class Image {
     required this.full,
     required this.sprite,
     required this.group,
-    required this.h,
-    required this.w,
     required this.x,
     required this.y,
+    required this.w,
+    required this.h,
   });
 
   factory Image.fromJson(Map<String, dynamic> json) {
