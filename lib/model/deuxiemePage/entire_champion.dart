@@ -4,7 +4,7 @@ class Entire {
   final String type;
   final String format;
   final String version;
-  final ListChampionTamere data;
+  final ListChampion data;
 
   const Entire({
     required this.type,
@@ -18,6 +18,6 @@ class Entire {
       type: json['type'],
       format: json['format'],
       version: json['version'],
-      data: ListChampionTamere.fromJson(json['data'])    );
+      data: ListChampion.fromJson(json['data'])    );
   }
 }

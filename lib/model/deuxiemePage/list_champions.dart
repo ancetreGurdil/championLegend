@@ -1,14 +1,14 @@
 import 'package:championlegends/model/deuxiemePage/champion_standalone.dart';
 
-class ListChampionTamere {
+class ListChampion {
    final Map<String,ChampionStandAlone> champion;
 
-  const ListChampionTamere({
+  const ListChampion({
     required this.champion,
   });
 
-  factory ListChampionTamere.fromJson(Map<String, dynamic> json) {
-    return ListChampionTamere(
+  factory ListChampion.fromJson(Map<String, dynamic> json) {
+    return ListChampion(
       champion: json.map((key, value) => MapEntry(key, ChampionStandAlone.fromJson(value)))
     );
   }

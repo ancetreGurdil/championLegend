@@ -95,7 +95,7 @@ class _ChampionPageState extends State<ChampionPage> {
                                 height: 70,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: NetworkImage('http://ddragon.leagueoflegends.com/cdn/13.6.1/img/spell/${champ.spells}')),
+                                    image: NetworkImage('http://ddragon.leagueoflegends.com/cdn/13.6.1/img/spell/${champ.id}Q.png')),
                                   border: Border.all(color: const Color.fromRGBO(200, 170, 110, 1), width: 3),
                                   borderRadius: BorderRadius.circular(5),
                                   
@@ -110,7 +110,7 @@ class _ChampionPageState extends State<ChampionPage> {
                                 height: 70,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: NetworkImage('http://ddragon.leagueoflegends.com/cdn/13.6.1/img/spell/${champ.passive.image.full}')),
+                                    image: NetworkImage('http://ddragon.leagueoflegends.com/cdn/13.6.1/img/spell/${champ.id}W.png')),
                                   border: Border.all(color: const Color.fromRGBO(200, 170, 110, 1), width: 3),
                                   borderRadius: BorderRadius.circular(5),
                                 ),
@@ -124,7 +124,7 @@ class _ChampionPageState extends State<ChampionPage> {
                                 height: 70,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: NetworkImage('http://ddragon.leagueoflegends.com/cdn/13.6.1/img/spell/${champ.passive.image.full}')),
+                                    image: NetworkImage('http://ddragon.leagueoflegends.com/cdn/13.6.1/img/spell/${champ.id}E.png')),
                                   border: Border.all(color: const Color.fromRGBO(200, 170, 110, 1), width: 3),
                                   borderRadius: BorderRadius.circular(5),
                                 ),
@@ -138,7 +138,7 @@ class _ChampionPageState extends State<ChampionPage> {
                                 height: 70,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: NetworkImage('http://ddragon.leagueoflegends.com/cdn/13.6.1/img/spell/${champ.passive.image.full}')),
+                                    image: NetworkImage('http://ddragon.leagueoflegends.com/cdn/13.6.1/img/spell/${champ.id}R.png')),
                                   border: Border.all(color: const Color.fromRGBO(200, 170, 110, 1), width: 3),
                                   borderRadius: BorderRadius.circular(5),
                                 ),

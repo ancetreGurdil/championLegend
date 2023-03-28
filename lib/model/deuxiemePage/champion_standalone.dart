@@ -1,4 +1,6 @@
+import 'package:championlegends/model/deuxiemePage/ability.dart';
 import 'package:championlegends/model/deuxiemePage/image.dart';
+import 'package:championlegends/model/deuxiemePage/listAbility.dart';
 import 'package:championlegends/model/deuxiemePage/passive.dart';
 
 class ChampionStandAlone {
@@ -16,7 +18,7 @@ class ChampionStandAlone {
   final String partype;
   final Object info;
   final Object stats;
-  final List spells;
+  final ListAbility spells;
   final Passive passive;
   final List recommended;
 
@@ -56,7 +58,7 @@ class ChampionStandAlone {
       partype: json['partype'],
       info: json['info'],
       stats: json['stats'],
-      spells: json['spells'],
+      spells: ListAbility.fromJson(json['spells']),
       passive: Passive.fromJson(json['passive']),
       recommended: json['recommended'],
     );
